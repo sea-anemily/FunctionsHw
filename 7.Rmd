@@ -1,0 +1,86 @@
+---
+title: "Fxns"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(magrittr)
+```
+## Pipe %>% 
+### Ctrl + Shift + M
+```{r eval=FALSE}
+foo_foo <- hop(foo_foo, through = forest)
+foo_foo <- scoop(foo_foo, up = field_mice)
+foo_foo <- bop(foo_foo, on = head)
+```
+vs
+
+```{r eval=FALSE}
+foo_foo %>% 
+  hop(through = forest) %>% 
+  scoop(up = field_mice) %>% 
+  bop(on = head)
+```
+
+## Functions
+###19.2.1
+1. because we don't want it to be a parameter that can be changed
+all outputs will end up being NA is we set na.rm to false
+2. 
+```{r}
+rescale01 <- function(x) {
+  rng <- range(x, na.rm = TRUE, finite = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+  x[x == -Inf] <- 1
+  return(x)
+  mean(is.na(x))
+}
+```
+###19.3.1
+1. f1 checks to see if the word starts with a certain prefix
+could be called is_prefix
+f2 wll remove the last element of a vector (remove_last)
+f3 gives a vector of length x and repeats y (repeat_max)
+3. mvrnorm() returns values from specified normal distribution with multiple variables whereas rnorm() from specified normal distribution with a singular variable
+4. by starting them the same, they will both pop up when you type norm_ but that could potentially lead to mistakes and is more work with the _
+###19.4.4
+1. ifelse requires less code becuase things can be listed easily
+2.
+```{r}
+greeting <- function(){
+  h <- lubridate::hour(lubridate::now())
+  if (dplyr::between(h, 12, 18)){
+    print("Good Afternoon.")
+  } else if(dplyr::between(h, 18, 24)){
+    print("Good Evening.")
+  } else {
+    print("Good Morning.")
+  }
+}
+```
+```{r}
+greeting()
+```
+
+3. 
+```{r}
+fizzbuzz <- function(){
+  if (x %% 3 == 0 && x %% 5 == 0){
+    print('fizzbuzz')
+  } else if (x %% 3 == 0){
+    print('fizz')
+  } else if (x %% 5 == 0){
+    print('buzz')
+  }else {
+    print(x)
+  }
+}
+```
+
+```{r eval=FALSE}
+fizzbuzz(15)
+```
